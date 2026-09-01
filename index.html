@@ -1,263 +1,226 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pinetporn | Quantum Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #090a0f;
-            --card-bg: rgba(25, 30, 45, 0.6);
-            --neon-cyan: #00f2fe;
-            --neon-purple: #4facfe;
-            --text-main: #ffffff;
-            --text-muted: #94a3b8;
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My New Web</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<!-- ==========================================================================
+     แก้เฉพาะในกล่องนี้ก็พอ ส่วนอื่นของไฟล์ไม่ต้องแตะก็ได้
+     ========================================================================== -->
+<script>
+const ME = {
+  github: "pinetporn",
+  name: "Pinetporn.Ch",
+  role: "นักศึกษาวิศวกรรมคอมพิวเตอร์ ปี 2 · มทร.อีสาน",
+  tagline: "สนใจการพัฒนาเว็บเพื่อควบคุมการทำงานของอุปกรณ์แบบเรียลไทม์",
+  about: "สวัสดีค่ะ เนตร นักศึกษาปี 2 วิศวกรรมคอมพิวเตอร์ มทร.อีสาน มีความสนใจด้าน Web Development และระบบควบคุมอุปกรณ์อัตโนมัติแบบเรียลไทม์ พร้อมเรียนรู้และพัฒนาโซลูชันที่ตอบโจทย์การใช้งานจริง",
+  learning: [
+    "พื้นฐานอินเทอร์เน็ตและบริการออนไลน์",
+    "HTML และ CSS",
+    "การใช้ Git และ GitHub",
+  ],
+  works: [],
+  links: [
+    { label: "GitHub", url: "https://github.com/your-username" },
+  ],
 
-        body {
-            font-family: 'Prompt', 'Space Grotesk', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow-x: hidden;
-            position: relative;
-        }
+  // ธีมสี เลือกหนึ่งอย่าง: "sakura" | "ocean" | "sunset" | "forest" | "grape" | "mono" | "mono-light"
+  theme: "ocean",
+};
+</script>
 
-        /* เอฟเฟกต์แสงนีออนพื้นหลังแบบเคลื่อนไหว */
-        body::before, body::after {
-            content: '';
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            border-radius: 50%;
-            filter: blur(120px);
-            z-index: -1;
-            opacity: 0.3;
-            animation: floatGlow 10s infinite alternate;
-        }
+<style>
+/* ---------- สีพื้นฐาน ทุกธีมใช้ร่วมกัน ---------- */
+:root {
+  --bg:#0b1020; --line:#24304f; --text:#e8edf7; --muted:#93a1c0;
+  --surface:rgba(255,255,255,.05);
+  --mono: ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
 
-        body::before {
-            background: var(--neon-cyan);
-            top: -100px;
-            left: -100px;
-        }
+/* ---------- ธีมสี (เพิ่มธีม sakura ชมพูน่ารักๆ ให้ด้วยครับ) ---------- */
+:root,
+[data-theme="sakura"] { --accent:#f472b6; --accent-soft:#ec4899; --glow1:#4a1d35; --glow2:#5c1033; }
+[data-theme="ocean"]  { --accent:#38bdf8; --accent-soft:#0ea5e9; --glow1:#1d2a52; --glow2:#10305c; }
+[data-theme="sunset"] { --accent:#fb923c; --accent-soft:#f97316; --glow1:#4a2418; --glow2:#5c2b10; }
+[data-theme="forest"] { --accent:#34d399; --accent-soft:#10b981; --glow1:#14342a; --glow2:#0f3d2e; }
+[data-theme="grape"]  { --accent:#c084fc; --accent-soft:#a855f7; --glow1:#2e1d52; --glow2:#3d1a5c; }
+[data-theme="mono"]   { --accent:#e2e8f0; --accent-soft:#cbd5e1; --glow1:#1e293b; --glow2:#0f172a; }
 
-        body::after {
-            background: var(--neon-purple);
-            bottom: -100px;
-            right: -100px;
-            animation-delay: -5s;
-        }
+[data-theme="mono-light"] {
+  --accent:#334155; --accent-soft:#475569; --glow1:#dbe3ee; --glow2:#e6ebf3;
+  --bg:#f7f9fc; --line:#ccd6e4; --text:#0f172a; --muted:#52627d;
+  --surface:rgba(15,23,42,.04);
+}
 
-        @keyframes floatGlow {
-            0% { transform: translateY(0) scale(1); }
-            100% { transform: translateY(30px) scale(1.1); }
-        }
+*{ box-sizing:border-box }
 
-        .hero-container {
-            width: 90%;
-            max-width: 1100px;
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
-            padding: 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-            position: relative;
-        }
+body{
+  margin:0; min-height:100vh; color:var(--text);
+  font-family:"Segoe UI","Noto Sans Thai",system-ui,sans-serif;
+  line-height:1.75;
+  background:
+    radial-gradient(1000px 460px at 12% -10%, var(--glow1) 0, transparent 60%),
+    radial-gradient(820px 400px at 92% 0,   var(--glow2) 0, transparent 55%),
+    var(--bg);
+}
 
-        .hero-content {
-            flex: 1;
-            padding-right: 40px;
-        }
+.wrap{ max-width:760px; margin:0 auto; padding:0 22px 80px }
 
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(0, 242, 254, 0.1);
-            border: 1px solid rgba(0, 242, 254, 0.3);
-            color: var(--neon-cyan);
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: 500;
-            margin-bottom: 25px;
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
-        }
+.hero{ display:flex; gap:22px; align-items:center; padding:64px 0 8px; flex-wrap:wrap }
+.avatar{
+  width:96px; height:96px; border-radius:50%;
+  border:2px solid var(--accent); object-fit:cover; flex-shrink:0;
+  background:var(--surface);
+}
+.avatar-fallback{
+  width:96px; height:96px; border-radius:50%; flex-shrink:0;
+  border:2px solid var(--accent); background:var(--surface);
+  display:flex; align-items:center; justify-content:center;
+  font-size:38px; font-weight:600; color:var(--accent);
+}
+.hero-text{ flex:1; min-width:240px }
+.role{
+  font:600 12px/1 var(--mono); letter-spacing:.14em;
+  text-transform:uppercase; color:var(--accent); margin:0 0 8px;
+}
+h1{ font-size:clamp(30px,6vw,46px); line-height:1.15; margin:0 0 8px; letter-spacing:-.02em }
+.tagline{ font-size:clamp(17px,2.6vw,20px); color:var(--text); margin:0; opacity:.92 }
 
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--neon-cyan);
-            border-radius: 50%;
-            box-shadow: 0 0 8px var(--neon-cyan);
-            animation: blink 1.5s infinite;
-        }
+.about{ color:var(--muted); margin:26px 0 0; max-width:62ch }
 
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
+.links{ display:flex; flex-wrap:wrap; gap:10px; padding:0; margin:24px 0 0; list-style:none }
+.links a{
+  display:inline-block; border:1px solid var(--line); border-radius:999px;
+  padding:9px 20px; color:var(--text); text-decoration:none; font-size:15px;
+  transition:border-color .15s ease, color .15s ease;
+}
+.links a:hover, .links a:focus-visible{ border-color:var(--accent); color:var(--accent) }
 
-        h1 {
-            font-size: clamp(36px, 5vw, 64px);
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, #ffffff 30%, var(--neon-cyan) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+section{ margin-top:52px }
+h2{
+  font:600 12px/1 var(--mono); letter-spacing:.16em; text-transform:uppercase;
+  color:var(--muted); border-bottom:1px solid var(--line);
+  padding-bottom:10px; margin:0 0 20px;
+}
 
-        h2 {
-            font-size: 20px;
-            color: var(--text-muted);
-            font-weight: 400;
-            margin-bottom: 25px;
-        }
+.learning{ list-style:none; padding:0; margin:0 }
+.learning li{
+  border-left:2px solid var(--accent); padding:2px 0 2px 16px;
+  margin-bottom:14px; color:var(--muted);
+}
 
-        p {
-            color: var(--text-muted);
-            line-height: 1.7;
-            font-size: 16px;
-            margin-bottom: 40px;
-        }
+.works{ display:grid; gap:14px; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)) }
+.work{
+  border:1px solid var(--line); border-radius:12px; padding:16px 18px;
+  background:var(--surface);
+}
+.work h3{ margin:0 0 6px; font-size:17px }
+.work p{ margin:0; color:var(--muted); font-size:14.5px }
+.work a{ color:var(--accent); text-decoration:none; font-size:14px; display:inline-block; margin-top:10px }
+.work a:hover{ text-decoration:underline }
+.empty{
+  border:1px dashed var(--line); border-radius:12px; padding:26px 20px;
+  color:var(--muted); text-align:center; font-size:15px;
+}
 
-        .cta-group {
-            display: flex;
-            gap: 20px;
-        }
+.panel{ border:1px solid var(--line); border-radius:14px; background:var(--surface); padding:4px 20px 16px }
+.row{
+  display:grid; grid-template-columns:minmax(130px,1fr) minmax(0,1.5fr); gap:12px;
+  padding:11px 0; border-bottom:1px dashed var(--line); align-items:baseline;
+}
+.row:last-of-type{ border-bottom:0 }
+.row dt{ color:var(--muted); font-size:14px; margin:0 }
+.row dd{ margin:0; font-family:var(--mono); font-size:14px; color:var(--accent); word-break:break-all }
+.row .note{ display:block; color:var(--muted); font-family:inherit; font-size:12.5px }
+.hint{ color:var(--muted); font-size:14px; margin:14px 0 0 }
 
-        .btn {
-            padding: 14px 28px;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            font-size: 15px;
-        }
+footer{ margin-top:56px; padding-top:22px; border-top:1px solid var(--line); color:var(--muted); font-size:14px }
+footer a{ color:var(--accent) }
 
-        .btn-glow {
-            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
-            color: var(--bg-color);
-            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
-            border: none;
-        }
-
-        .btn-glow:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 30px rgba(0, 242, 254, 0.7);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--text-main);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .btn-outline:hover {
-            border-color: var(--neon-cyan);
-            color: var(--neon-cyan);
-            background: rgba(0, 242, 254, 0.05);
-        }
-
-        /* กรอบรูปภาพทรง Hologram ด้านขวา */
-        .hologram-frame {
-            width: 280px;
-            height: 280px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, rgba(0,242,254,0.2), rgba(79,172,254,0.2));
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            box-shadow: 0 0 40px rgba(0, 242, 254, 0.15);
-            border: 1px solid rgba(0, 242, 254, 0.3);
-        }
-
-        .hologram-frame::before {
-            content: '';
-            position: absolute;
-            inset: -5px;
-            border-radius: 50%;
-            border: 2px dashed rgba(0, 242, 254, 0.4);
-            animation: rotateRing 20s linear infinite;
-        }
-
-        @keyframes rotateRing {
-            100% { transform: rotate(360deg); }
-        }
-
-        .profile-img {
-            width: 250px;
-            height: 250px;
-            border-radius: 50%;
-            object-fit: cover;
-            filter: grayscale(20%) contrast(110%);
-            transition: 0.5s;
-        }
-
-        .hologram-frame:hover .profile-img {
-            filter: grayscale(0%);
-            transform: scale(1.03);
-        }
-
-        /* Responsive สำหรับมือถือ */
-        @media (max-width: 768px) {
-            .hero-container {
-                flex-direction: column-reverse;
-                text-align: center;
-                padding: 40px 20px;
-            }
-            .hero-content {
-                padding-right: 0;
-                margin-top: 30px;
-            }
-            .cta-group {
-                justify-content: center;
-                flex-direction: column;
-            }
-        }
-    </style>
+@media (max-width:520px){
+  .hero{ padding-top:44px; gap:16px }
+  .avatar, .avatar-fallback{ width:72px; height:72px; font-size:28px }
+  .row{ grid-template-columns:1fr; gap:2px }
+}
+</style>
 </head>
 <body>
+<div class="wrap">
 
-    <div class="hero-container">
-        <div class="hero-content">
-            <div class="status-badge">
-                <span class="status-dot"></span>
-                SYSTEM ONLINE • PINEYPORN PORTFOLIO
-            </div>
-            <h1>Pinetporn</h1>
-            <h2>Creative Developer & Tech Explorer</h2>
-            <p>ยินดีต้อนรับสู่พื้นที่ดิจิทัลส่วนตัว ขับเคลื่อนด้วยไอเดียไร้ขีดจำกัด เทคโนโลยีล้ำสมัย และโค้ดที่เขียนด้วยความตั้งใจ 🚀</p>
-            
-            <div class="cta-group">
-                <a href="https://github.com/pinetporn" class="btn btn-glow" target="_blank">⚡ Explore GitHub</a>
-                <a href="#projects" class="btn btn-outline">📂 View Projects</a>
-            </div>
-        </div>
-
-        <div class="hologram-frame">
-            <img src="https://via.placeholder.com/250" alt="Pinetporn Profile" class="profile-img">
-        </div>
+  <header class="hero">
+    <img class="avatar" id="avatar" alt="" width="96" height="96">
+    <div class="hero-text">
+      <p class="role" id="role"></p>
+      <h1 id="name"></h1>
+      <p class="tagline" id="tagline"></p>
     </div>
+  </header>
+  <p class="about" id="about"></p>
+  <ul class="links" id="links"></ul>
 
+  <section>
+    <h2>กำลังเรียนรู้</h2>
+    <ul class="learning" id="learning"></ul>
+  </section>
+
+  <section>
+    <h2>ผลงาน</h2>
+    <div class="works" id="works"></div>
+  </section>
+
+  <section>
+    <h2>ข้อมูลการเชื่อมต่อของหน้านี้</h2>
+    <div class="panel">
+      <dl id="netpanel"></dl>
+      <p class="hint">กด F12 เลือกแท็บ Network แล้วกด Ctrl+F5 เพื่อเปรียบเทียบค่า</p>
+    </div>
+  </section>
+
+  <footer>
+    สร้างด้วย HTML, CSS และ JavaScript · โฮสต์บน GitHub Pages ·
+    <a id="repolink" href="https://github.com">ดูซอร์สโค้ดของหน้านี้</a>
+  </footer>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+
+document.title = ME.name;
+document.documentElement.dataset.theme = ME.theme || 'sakura';
+
+$('role').textContent    = ME.role;
+$('name').textContent    = ME.name;
+$('tagline').textContent = ME.tagline;
+$('about').textContent   = ME.about;
+
+const avatar = $('avatar');
+avatar.alt = 'รูปโปรไฟล์ของ ' + ME.name;
+avatar.addEventListener('error', () => {
+  const box = document.createElement('div');
+  box.className = 'avatar-fallback';
+  box.setAttribute('aria-hidden', 'true');
+  box.textContent = (ME.name || '?').trim().charAt(0);
+  avatar.replaceWith(box);
+});
+avatar.src = 'https://github.com/' + ME.github + '.png?size=192';
+
+for (const item of ME.learning || []) {
+  const li = document.createElement('li');
+  li.textContent = item;
+  $('learning').appendChild(li);
+}
+
+for (const link of ME.links || []) {
+  const a = document.createElement('a');
+  a.href = link.url;
+  a.textContent = link.label;
+  a.rel = 'noopener noreferrer';
+  const li = document.createElement('li');
+  li.appendChild(a);
+  $('links').appendChild(li);
+}
+</script>
 </body>
 </html>
