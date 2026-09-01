@@ -1,241 +1,3 @@
-<!doctype html>
-<html lang="th">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>My New Web</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-
-<!-- ==========================================================================
-     แก้เฉพาะในกล่องนี้ก็พอ ส่วนอื่นของไฟล์ไม่ต้องแตะก็ได้
-     ========================================================================== -->
-<script>
-const ME = {
-  github: "pinetporn",
-  name: "Pinetporn.Ch",
-  role: "นักศึกษาวิศวกรรมคอมพิวเตอร์ ปี 2 · มทร.อีสาน",
-  tagline: "สนใจการพัฒนาเว็บเพื่อควบคุมการทำงานของอุปกรณ์แบบเรียลไทม์",
-  about: "สวัสดีค่ะ เนตร นักศึกษาปี 2 วิศวกรรมคอมพิวเตอร์ มทร.อีสาน มีความสนใจด้าน Web Development และระบบควบคุมอุปกรณ์อัตโนมัติแบบเรียลไทม์ พร้อมเรียนรู้และพัฒนาโซลูชันที่ตอบโจทย์การใช้งานจริง",
-  learning: [
-    "พื้นฐานอินเทอร์เน็ตและบริการออนไลน์",
-    "HTML และ CSS",
-    "การใช้ Git และ GitHub",
-  ],
-  works: [],
-  links: [
-    { label: "GitHub", url: "https://github.com/your-username" },
-  ],
-
-  // ธีมสี เลือกหนึ่งอย่าง: "sakura" | "ocean" | "sunset" | "forest" | "grape" | "mono" | "mono-light"
-  theme: "sakura",
-};
-</script>
-
-<style>
-/* ---------- สีพื้นฐาน ทุกธีมใช้ร่วมกัน ---------- */
-:root {
-  --bg:#0b1020; --line:#24304f; --text:#e8edf7; --muted:#93a1c0;
-  --surface:rgba(255,255,255,.05);
-  --mono: ui-monospace,"SF Mono",Menlo,Consolas,monospace;
-}
-
-/* ---------- ธีมสี ---------- */
-:root,
-[data-theme="sakura"] { --accent:#f472b6; --accent-soft:#ec4899; --glow1:#4a1d35; --glow2:#5c1033; }
-[data-theme="ocean"]  { --accent:#38bdf8; --accent-soft:#0ea5e9; --glow1:#1d2a52; --glow2:#10305c; }
-[data-theme="sunset"] { --accent:#fb923c; --accent-soft:#f97316; --glow1:#4a2418; --glow2:#5c2b10; }
-[data-theme="forest"] { --accent:#34d399; --accent-soft:#10b981; --glow1:#14342a; --glow2:#0f3d2e; }
-[data-theme="grape"]  { --accent:#c084fc; --accent-soft:#a855f7; --glow1:#2e1d52; --glow2:#3d1a5c; }
-[data-theme="mono"]   { --accent:#e2e8f0; --accent-soft:#cbd5e1; --glow1:#1e293b; --glow2:#0f172a; }
-
-[data-theme="mono-light"] {
-  --accent:#334155; --accent-soft:#475569; --glow1:#dbe3ee; --glow2:#e6ebf3;
-  --bg:#f7f9fc; --line:#ccd6e4; --text:#0f172a; --muted:#52627d;
-  --surface:rgba(15,23,42,.04);
-}
-
-*{ box-sizing:border-box }
-
-body{
-  margin:0; min-height:100vh; color:var(--text);
-  font-family:"Segoe UI","Noto Sans Thai",system-ui,sans-serif;
-  line-height:1.75;
-  background:
-    radial-gradient(1000px 460px at 12% -10%, var(--glow1) 0, transparent 60%),
-    radial-gradient(820px 400px at 92% 0,   var(--glow2) 0, transparent 55%),
-    var(--bg);
-}
-
-/* ---------- การจัดวางโครงสร้างแบบสองคอลัมน์ (Split Modern Dashboard Layout) ---------- */
-.wrap {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 40px 24px 80px;
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 40px;
-  align-items: start;
-}
-
-/* ฝั่งซ้าย: Profile Sidebar */
-.hero {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0;
-  position: sticky;
-  top: 40px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  padding: 28px 24px;
-  backdrop-filter: blur(10px);
-}
-
-.avatar, .avatar-fallback {
-  width: 100px;
-  height: 100px;
-  border-radius: 20px;
-  border: 2px solid var(--accent);
-  margin-bottom: 16px;
-  box-shadow: 0 8px 20px -6px var(--glow1);
-}
-
-.hero-text { min-width: 0; width: 100%; }
-.role { font-size: 11px; margin-bottom: 6px; }
-h1 { font-size: 26px; margin-bottom: 10px; }
-.tagline { font-size: 14px; opacity: 0.85; line-height: 1.5; }
-
-/* ย้ายส่วน About และ Links ไปอยู่ฝั่ง Sidebar */
-.about {
-  grid-column: 1;
-  margin: 0;
-  font-size: 13.5px;
-  color: var(--muted);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 20px;
-}
-
-.links {
-  grid-column: 1;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.links a {
-  display: block;
-  text-align: center;
-  border-radius: 12px;
-  padding: 10px 16px;
-  background: var(--surface);
-  font-weight: 500;
-}
-
-/* ฝั่งขวา: Main Content Area */
-section {
-  grid-column: 2;
-  margin-top: 0;
-  margin-bottom: 32px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  padding: 24px;
-}
-
-section:first-of-type { margin-top: 0; }
-
-h2 {
-  font-size: 13px;
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 12px;
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-}
-
-h2::before {
-  content: "///";
-  color: var(--accent);
-  margin-right: 8px;
-}
-
-/* ปรับสไตล์ลิสต์การเรียนรู้และการ์ดผลงาน */
-.learning li {
-  border-left: 3px solid var(--accent);
-  background: rgba(255,255,255,.02);
-  border-radius: 0 10px 10px 0;
-  padding: 10px 16px;
-  margin-bottom: 10px;
-}
-
-.works { grid-template-columns: 1fr; }
-.work { border-radius: 14px; }
-
-.panel { border: none; padding: 0; background: transparent; }
-
-footer {
-  grid-column: 1 / -1;
-  text-align: center;
-  margin-top: 20px;
-  padding-top: 20px;
-}
-
-/* รองรับ Responsive สำหรับหน้าจอขนาดเล็ก */
-@media (max-width: 768px) {
-  .wrap {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 20px 16px;
-  }
-  .hero, .about, .links, section {
-    grid-column: 1;
-  }
-  .hero { position: relative; top: 0; }
-}
-</style>
-</head>
-<body>
-<div class="wrap">
-
-  <header class="hero">
-    <img class="avatar" id="avatar" alt="" width="96" height="96">
-    <div class="hero-text">
-      <p class="role" id="role"></p>
-      <h1 id="name"></h1>
-      <p class="tagline" id="tagline"></p>
-    </div>
-  </header>
-  <p class="about" id="about"></p>
-  <ul class="links" id="links"></ul>
-
-  <section>
-    <h2>กำลังเรียนรู้</h2>
-    <ul class="learning" id="learning"></ul>
-  </section>
-
-  <section>
-    <h2>ผลงาน</h2>
-    <div class="works" id="works"></div>
-  </section>
-
-  <section>
-    <h2>ข้อมูลการเชื่อมต่อของหน้านี้</h2>
-    <div class="panel">
-      <dl id="netpanel"></dl>
-      <p class="hint">กด F12 เลือกแท็บ Network แล้วกด Ctrl+F5 เพื่อเปรียบเทียบค่า</p>
-    </div>
-  </section>
-
-  <footer>
-    สร้างด้วย HTML, CSS และ JavaScript · โฮสต์บน GitHub Pages ·
-    <a id="repolink" href="https://github.com">ดูซอร์สโค้ดของหน้านี้</a>
-  </footer>
-</div>
-
 <script>
 const $ = (id) => document.getElementById(id);
 
@@ -273,6 +35,79 @@ for (const link of ME.links || []) {
   li.appendChild(a);
   $('links').appendChild(li);
 }
+
+// ==========================================
+// ส่วนที่เพิ่มเข้ามา: ฟังก์ชันคำนวณและแสดงข้อมูลการเชื่อมต่อ
+// ==========================================
+function renderNetworkPanel() {
+  const panel = $('netpanel');
+  if (!panel) return;
+
+  // ดึงข้อมูล Performance Navigation Timing
+  const perf = performance.getEntriesByType("navigation")[0];
+  const protocol = location.protocol.replace(':', '');
+  const domain = location.hostname;
+  
+  let httpVer = "h1.1";
+  if (perf && perf.nextHopProtocol) {
+    httpVer = perf.nextHopProtocol;
+  }
+
+  // คำนวณระยะเวลา (ms)
+  const dns = perf ? Math.round(perf.domainLookupEnd - perf.domainLookupStart) : 0;
+  const connection = perf ? Math.round(perf.connectEnd - perf.connectStart) : 0;
+  const ttfb = perf ? Math.round(perf.responseStart - perf.requestStart) : 0;
+
+  const netData = [
+    {
+      label: "Domain name",
+      value: domain,
+      note: "ชื่อโดเมนต้องถูกแปลงเป็น IP address ผ่าน DNS ก่อน จึงจะติดต่อ server ได้"
+    },
+    {
+      label: "Protocol",
+      value: protocol + ":",
+      note: `${protocol} คือ HTTP ที่เพิ่มการเข้ารหัสและการยืนยันตัวตน server ด้วย certificate`
+    },
+    {
+      label: "HTTP version",
+      value: httpVer,
+      note: `${httpVer} คือโปรโตคอลที่ใช้ในการส่งข้อมูลระหว่างเบราว์เซอร์กับเซิร์ฟเวอร์`
+    },
+    {
+      label: "DNS lookup",
+      value: `${dns < 0 ? 0 : dns} ms`,
+      note: "เวลาที่ใช้แปลงชื่อโดเมนเป็น IP address ถ้าได้ 0 ms แปลว่ามีคำตอบอยู่ใน cache แล้ว"
+    },
+    {
+      label: "Connection + TLS",
+      value: `${connection < 0 ? 0 : connection} ms`,
+      note: "เวลาร้างการเชื่อมต่อ รวมขั้นตอน TLS handshake ก่อนเริ่มรับส่งข้อมูลจริง"
+    },
+    {
+      label: "TTFB",
+      value: `${ttfb < 0 ? 0 : ttfb} ms`,
+      note: "Time To First Byte เวลาตั้งแต่ส่ง request จนได้ข้อมูลไบต์แรกกลับมา ยิ่ง server ไกลยิ่งสูง"
+    }
+  ];
+
+  panel.innerHTML = "";
+  netData.forEach(item => {
+    const row = document.createElement('div');
+    row.className = 'row';
+    
+    const dt = document.createElement('dt');
+    dt.textContent = item.label;
+    
+    const dd = document.createElement('dd');
+    dd.innerHTML = `${item.value} <span class="note">${item.note}</span>`;
+    
+    row.appendChild(dt);
+    row.appendChild(dd);
+    panel.appendChild(row);
+  });
+}
+
+// เรียกใช้ฟังก์ชันหลังจากโหลดหน้าเว็บเสร็จสมบูรณ์
+window.addEventListener('load', renderNetworkPanel);
 </script>
-</body>
-</html>
