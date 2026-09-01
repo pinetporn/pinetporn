@@ -58,7 +58,7 @@ learning: [
   --mono: ui-monospace,"SF Mono",Menlo,Consolas,monospace;
 }
 
-/* ---------- ธีมสี (ปรับแต่งเพิ่มมิติความเรืองแสง) ---------- */
+/* ---------- ธีมสี ---------- */
 :root,
 [data-theme="ocean"]  { --accent:#38bdf8; --accent-soft:#0284c7; --glow1:rgba(56, 189, 248, 0.4); --glow2:rgba(14, 165, 233, 0.25); }
 [data-theme="sunset"] { --accent:#fb923c; --accent-soft:#ea580c; --glow1:rgba(251, 146, 60, 0.4); --glow2:rgba(249, 115, 22, 0.25); }
@@ -283,14 +283,13 @@ section:last-of-type {
   grid-column: span 12;
 }
 
-/* ---------- ปรับหัวข้อเด่นพิเศษ (H2) ---------- */
+/* ---------- หัวข้อเด่นพิเศษ (H2) ---------- */
 h2 {
   font: 800 14px/1 var(--mono);
   letter-spacing: .22em;
   text-transform: uppercase;
   color: var(--accent);
   
-  /* เพิ่มดีไซน์แถบนีออนโดดเด่น */
   background: linear-gradient(90deg, var(--glow1) 0%, transparent 100%);
   padding: 10px 16px;
   border-left: 4px solid var(--accent);
@@ -313,24 +312,57 @@ h2::before {
 
 @keyframes spinStar { 100% { transform: rotate(360deg); } }
 
-/* ลิสต์การเรียนรู้ป๊อปอัป */
-.learning { list-style: none; padding: 0; margin: 0; }
+/* ---------- ลิสต์การเรียนรู้ปรับปรุงลูกเล่นเด่นเรืองแสง (Cyber Badges) ---------- */
+.learning { 
+  list-style: none; 
+  padding: 0; 
+  margin: 0; 
+  counter-reset: learning-counter;
+}
+
 .learning li {
-  border-left: 4px solid var(--accent);
-  background: linear-gradient(90deg, var(--glow1) 0%, transparent 100%);
-  border-radius: 0 14px 14px 0;
-  padding: 10px 18px;
+  counter-increment: learning-counter;
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 16px;
+  padding: 12px 18px;
   margin-bottom: 12px;
   color: var(--text);
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 600;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+}
+
+/* เลขลำดับ 01, 02, ... */
+.learning li::before {
+  content: "0" counter(learning-counter);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--glow1);
+  padding: 4px 8px;
+  border-radius: 8px;
+  margin-right: 14px;
+  border: 1px solid var(--glow1);
   transition: all 0.3s ease;
 }
 
 .learning li:hover {
-  transform: translateX(8px);
-  background: var(--glow1);
-  border-left-color: #f472b6;
+  transform: translateX(10px) scale(1.02);
+  border-color: var(--accent);
+  background: linear-gradient(90deg, var(--glow1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  box-shadow: 0 8px 20px var(--glow1);
+}
+
+.learning li:hover::before {
+  background: var(--accent);
+  color: var(--bg);
+  box-shadow: 0 0 10px var(--accent);
 }
 
 /* Works */
