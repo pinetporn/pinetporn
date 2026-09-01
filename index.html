@@ -53,23 +53,23 @@ learning: [
 <style>
 /* ---------- สีพื้นฐาน ทุกธีมใช้ร่วมกัน ---------- */
 :root {
-  --bg:#0b1020; --line:#24304f; --text:#e8edf7; --muted:#93a1c0;
-  --surface:rgba(255,255,255,.05);      /* พื้นของการ์ดผลงานและแผงข้อมูล */
+  --bg:#080d1a; --line:#1e293b; --text:#f1f5f9; --muted:#94a3b8;
+  --surface:rgba(15, 23, 42, 0.65);      /* พื้นของการ์ดผลงานและแผงข้อมูล */
   --mono: ui-monospace,"SF Mono",Menlo,Consolas,monospace;
 }
 
-/* ---------- ธีมสี ---------- */
+/* ---------- ธีมสี (ปรับแต่งเพิ่มมิติความเรืองแสง) ---------- */
 :root,
-[data-theme="ocean"]  { --accent:#38bdf8; --accent-soft:#0ea5e9; --glow1:rgba(56, 189, 248, 0.35); --glow2:rgba(14, 165, 233, 0.25); }
-[data-theme="sunset"] { --accent:#fb923c; --accent-soft:#f97316; --glow1:rgba(251, 146, 60, 0.35); --glow2:rgba(249, 115, 22, 0.25); }
-[data-theme="forest"] { --accent:#34d399; --accent-soft:#10b981; --glow1:rgba(52, 211, 153, 0.35); --glow2:rgba(16, 185, 129, 0.25); }
-[data-theme="grape"]  { --accent:#c084fc; --accent-soft:#a855f7; --glow1:rgba(192, 132, 252, 0.35); --glow2:rgba(168, 85, 247, 0.25); }
-[data-theme="mono"]   { --accent:#e2e8f0; --accent-soft:#cbd5e1; --glow1:rgba(226, 232, 240, 0.25); --glow2:rgba(203, 213, 225, 0.2); }
+[data-theme="ocean"]  { --accent:#38bdf8; --accent-soft:#0284c7; --glow1:rgba(56, 189, 248, 0.4); --glow2:rgba(14, 165, 233, 0.25); }
+[data-theme="sunset"] { --accent:#fb923c; --accent-soft:#ea580c; --glow1:rgba(251, 146, 60, 0.4); --glow2:rgba(249, 115, 22, 0.25); }
+[data-theme="forest"] { --accent:#34d399; --accent-soft:#059669; --glow1:rgba(52, 211, 153, 0.4); --glow2:rgba(16, 185, 129, 0.25); }
+[data-theme="grape"]  { --accent:#c084fc; --accent-soft:#9333ea; --glow1:rgba(192, 132, 252, 0.4); --glow2:rgba(168, 85, 247, 0.25); }
+[data-theme="mono"]   { --accent:#f1f5f9; --accent-soft:#64748b; --glow1:rgba(241, 245, 249, 0.3); --glow2:rgba(100, 116, 139, 0.2); }
 
 [data-theme="mono-light"] {
-  --accent:#334155; --accent-soft:#475569; --glow1:rgba(51, 65, 85, 0.15); --glow2:rgba(71, 85, 105, 0.12);
-  --bg:#f7f9fc; --line:#ccd6e4; --text:#0f172a; --muted:#52627d;
-  --surface:rgba(15,23,42,.04);
+  --accent:#0f172a; --accent-soft:#475569; --glow1:rgba(15, 23, 42, 0.15); --glow2:rgba(71, 85, 105, 0.12);
+  --bg:#f8fafc; --line:#cbd5e1; --text:#0f172a; --muted:#475569;
+  --surface:rgba(255, 255, 255, 0.85);
 }
 
 *{ box-sizing:border-box }
@@ -79,9 +79,9 @@ body{
   font-family:"Segoe UI","Noto Sans Thai",system-ui,sans-serif;
   line-height:1.75;
   background:
-    radial-gradient(600px 600px at 15% 15%, var(--glow1) 0, transparent 70%),
-    radial-gradient(600px 600px at 85% 85%, var(--glow2) 0, transparent 70%),
-    radial-gradient(400px 400px at 50% 50%, rgba(244, 114, 182, 0.15) 0, transparent 80%),
+    radial-gradient(700px 700px at 15% 15%, var(--glow1) 0, transparent 70%),
+    radial-gradient(700px 700px at 85% 85%, var(--glow2) 0, transparent 70%),
+    radial-gradient(500px 500px at 50% 50%, rgba(56, 189, 248, 0.08) 0, transparent 80%),
     var(--bg);
   background-attachment: fixed;
   overflow-x: hidden;
@@ -120,11 +120,11 @@ body::after { bottom: 15%; right: 8%; animation-delay: 3s; content: "🌸"; }
 /* โครงสร้างการ์ดแบบ Soft Glassmorphism + Bouncy Hover */
 .hero, .about, .links, section {
   background: var(--surface);
-  border: 2px solid rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
   border-radius: 28px;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
   transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   position: relative;
   overflow: hidden;
@@ -133,7 +133,7 @@ body::after { bottom: 15%; right: 8%; animation-delay: 3s; content: "🌸"; }
 .hero:hover, .about:hover, .links:hover, section:hover {
   transform: translateY(-8px) scale(1.01);
   border-color: var(--accent);
-  box-shadow: 0 20px 40px -10px var(--glow1), 0 0 20px var(--accent-soft);
+  box-shadow: 0 20px 40px -10px var(--glow1), 0 0 25px var(--glow1);
 }
 
 /* แสงสีรุ้งพาดผ่านเวลาย้ายเมาส์ (Rainbow Shimmer) */
@@ -147,7 +147,7 @@ body::after { bottom: 15%; right: 8%; animation-delay: 3s; content: "🌸"; }
   pointer-events: none;
 }
 
-.hero:hover::after, .about:hover::hover::after, .links:hover::after, section:hover::after {
+.hero:hover::after, .about:hover::after, .links:hover::after, section:hover::after {
   left: 150%;
 }
 
@@ -158,7 +158,7 @@ body::after { bottom: 15%; right: 8%; animation-delay: 3s; content: "🌸"; }
   align-items: center;
   gap: 28px;
   padding: 36px;
-  background: linear-gradient(135deg, var(--surface) 0%, rgba(255,255,255,0.02) 100%);
+  background: linear-gradient(135deg, var(--surface) 0%, rgba(255,255,255,0.03) 100%);
 }
 
 /* รูปโปรไฟล์หัวใจ/วิ้งๆ (Cute Bounce Profile) */
@@ -192,9 +192,11 @@ body::after { bottom: 15%; right: 8%; animation-delay: 3s; content: "🌸"; }
   color: var(--accent);
   margin: 0 0 10px;
   display: inline-block;
-  padding: 6px 12px;
+  padding: 8px 16px;
   background: var(--glow1);
+  border: 1px solid var(--accent);
   border-radius: 20px;
+  box-shadow: 0 0 15px var(--glow1);
 }
 
 h1 {
@@ -281,22 +283,31 @@ section:last-of-type {
   grid-column: span 12;
 }
 
+/* ---------- ปรับหัวข้อเด่นพิเศษ (H2) ---------- */
 h2 {
-  font: 700 13px/1 var(--mono);
-  letter-spacing: .18em;
+  font: 800 14px/1 var(--mono);
+  letter-spacing: .22em;
   text-transform: uppercase;
   color: var(--accent);
-  border-bottom: 2px dashed var(--line);
-  padding-bottom: 14px;
+  
+  /* เพิ่มดีไซน์แถบนีออนโดดเด่น */
+  background: linear-gradient(90deg, var(--glow1) 0%, transparent 100%);
+  padding: 10px 16px;
+  border-left: 4px solid var(--accent);
+  border-bottom: 2px solid var(--line);
+  border-radius: 0 12px 12px 0;
   margin: 0 0 22px;
+  
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  text-shadow: 0 0 10px var(--glow1);
 }
 
 h2::before {
   content: "✦";
-  font-size: 14px;
+  font-size: 16px;
+  color: var(--accent);
   animation: spinStar 3s linear infinite;
 }
 
