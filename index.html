@@ -6,64 +6,45 @@
 <title>เว็บไซต์ของฉัน</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 
-<!-- ==========================================================================
-     กล่องข้อมูลส่วนตัว (ME) - ปรับปรุงข้อมูลให้ดูเป็นมืออาชีพและน่าสนใจ
-     ========================================================================== -->
 <script>
 const ME = {
 
-  // GitHub username ของคุณ ใช้ดึงรูปโปรไฟล์มาแสดงอัตโนมัติ
+  // GitHub username ของคุณ ใช้ดึงรูปโปรไฟล์มาแสดงอัตโนมัติ ไม่ต้องอัปโหลดรูปเอง
   github: "pinetporn",
 
-  // ชื่อที่ต้องการให้แสดง
+  // ชื่อที่ต้องการให้แสดง ใช้ชื่อเล่นได้
   name: "pinetporn.ch",
 
-  // บอกว่าคุณคือใคร สั้น ๆ แต่กระชับและตรงจุด
-  role: "⚡ Computer Engineering Student · Automation & Web Control",
+  // บอกว่าคุณคือใคร สั้น ๆ
+  role: "นักศึกษาวิศวกรรมคอมพิวเตอร์ ปี 2 · มทร.อีสาน",
 
-  // ประโยคจุดขาย/ความสนใจหลัก
-  tagline: "💡 หลงใหลการเชื่อมโลกฮาร์ดแวร์เข้ากับเว็บแบบ Real-time และระบบควบคุมอัตโนมัติ",
+  // หนึ่งประโยคว่าคุณสนใจสร้างอะไร เขียนให้เจาะจง อย่าเขียนกว้าง ๆ
+  // ไม่ดี: "รักการเขียนโปรแกรม"     ดี: "อยากทำระบบรดน้ำต้นไม้ที่ดูพยากรณ์อากาศก่อนรดน้ำ"
+  tagline: "สนใจระบบเว็บคอนโทรเลอร์อุปกรณ์แบบเรียลไทม์",
 
-  // บทแนะนำตัวสั้น ๆ
-  about: "นักศึกษาวิศวกรรมคอมพิวเตอร์ที่สนุกกับการเปลี่ยนโค้ดให้กลายเป็นการควบคุมอุปกรณ์จริง! สนใจทั้ง Web Development, IoT, ระบบเครือข่าย และ AI ชอบทดลองเทคโนโลยีใหม่ๆ เพื่อสร้างสรรค์นวัตกรรมที่ใช้งานได้จริง",
+  // แนะนำตัว 2-3 บรรทัด ว่ามาจากไหน สนใจอะไร กำลังจะไปทางไหน
+  about: "นักศึกษาวิศวกรรมคอมพิวเตอร์ที่ชอบพัฒนาเว็บและลองทำอะไรใหม่ ๆ กำลังเรียนรู้และพัฒนาตัวเองเพื่อเติบโตเป็น Web Developer",
 
-  // สิ่งที่กำลังเรียนรู้และทักษะที่สนใจ
-  learning: [
-    "🚀 Frontend & Web Control (HTML, CSS, JavaScript)",
-    "⚙️ Backend & RESTful API Architecture",
-    "🤖 Robot Operating System (ROS / ROS 2)",
-    "🌐 Network Infrastructure, VLANs & IoT Systems",
-    "📊 Data Science & Machine Learning with Python",
-    "🛠️ Version Control with Git & GitHub Workflow"
-  ],
+  // กำลังเรียนรู้อะไรอยู่ตอนนี้ ใส่ได้ 2-5 รายการ
+learning: [
+  "HTML และ CSS",
+  "JavaScript",
+  "Git และ GitHub",
+  "พื้นฐาน Backend และ API",
+  "ฐานข้อมูลและ SQL",
+],
 
-  // ผลงานเด่นและโปรเจกต์ที่น่าสนใจ
-  works: [
-    { 
-      title: "🤖 Delivery Robot Communication Node", 
-      desc: "ออกแบบและพัฒนานโหนดสื่อสารสำหรับหุ่นยนต์ส่งของโดยใช้ ROS 2 ร่วมกับระบบ IoT", 
-      url: "https://github.com/pinetporn" 
-    },
-    { 
-      title: "🍄 Automated Mushroom Farm Control", 
-      desc: "ระบบสมาร์ตฟาร์มเห็ด ควบคุมและติดตามสภาพแวดล้อมแบบ Real-time ผ่าน Web Dashboard", 
-      url: "https://github.com/pinetporn" 
-    },
-    { 
-      title: "🛠️ Computer Equipment Maintenance System", 
-      desc: "ระบบบริหารจัดการและบำรุงรักษาอุปกรณ์คอมพิวเตอร์สำหรับองค์กร", 
-      url: "https://github.com/pinetporn" 
-    }
-  ],
+  // ผลงาน ปี 1 เทอมแรกยังไม่มีก็ไม่เป็นไร ปล่อยว่างไว้ได้ หน้าเว็บจะขึ้นข้อความให้เอง
+  // เมื่อมีงานแล้วค่อยเพิ่มทีละชิ้น เช่น
+  // { title: "เครื่องวัดอุณหภูมิห้อง", desc: "ใช้ Arduino กับเซนเซอร์ DHT11", url: "" },
+  works: [],
 
-  // ช่องทางการติดต่อ / ลิงก์ภายนอก
+  // ช่องทางติดต่อ ใช้ลิงก์สาธารณะเท่านั้น อย่าใส่เบอร์โทรหรืออีเมลส่วนตัว
   links: [
-    { label: "💻 GitHub Profile", url: "https://github.com/pinetporn" },
-    { label: "✉️ Contact / Email", url: "https://github.com/pinetporn" },
-    { label: "📄 Portfolio Repository", url: "https://github.com/pinetporn" }
+    { label: "GitHub", url: "https://github.com/pinetporn" },
   ],
 
-  // ธีมสี เลือกได้: "ocean" | "sunset" | "forest" | "grape" | "mono" | "mono-light"
+  // ธีมสี เลือกหนึ่งอย่าง: "ocean" | "sunset" | "forest" | "grape" | "mono" | "mono-light"
   theme: "ocean",
 
 };
@@ -166,7 +147,7 @@ body::after { bottom: 15%; right: 8%; animation-delay: 3s; content: "🌸"; }
   pointer-events: none;
 }
 
-.hero:hover::after, .about:hover::after, .links:hover::after, section:hover::after {
+.hero:hover::after, .about:hover::hover::after, .links:hover::after, section:hover::after {
   left: 150%;
 }
 
@@ -206,15 +187,14 @@ body::after { bottom: 15%; right: 8%; animation-delay: 3s; content: "🌸"; }
 .hero-text { flex: 1; min-width: 240px; }
 .role {
   font: 700 12px/1 var(--mono);
-  letter-spacing: .12em;
+  letter-spacing: .16em;
   text-transform: uppercase;
-  color: #ffffff;
+  color: var(--accent);
   margin: 0 0 10px;
   display: inline-block;
-  padding: 8px 14px;
-  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-soft) 100%);
+  padding: 6px 12px;
+  background: var(--glow1);
   border-radius: 20px;
-  box-shadow: 0 4px 12px var(--glow1);
 }
 
 h1 {
@@ -301,40 +281,26 @@ section:last-of-type {
   grid-column: span 12;
 }
 
-/* ---------- หัวข้อหลัก (H2) โดดเด่นเป็นพิเศษ (Badge Style) ---------- */
 h2 {
-  font-family: var(--mono);
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: .14em;
+  font: 700 13px/1 var(--mono);
+  letter-spacing: .18em;
   text-transform: uppercase;
-  color: #ffffff;
-  
-  /* ตกแต่งเป็นแถบป้ายเรืองแสง */
-  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-soft) 100%);
-  padding: 10px 18px;
-  border-radius: 14px;
-  margin: 0 0 22px 0;
-  
-  /* เงา 3D นีออน */
-  box-shadow: 0 6px 20px var(--glow1), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  color: var(--accent);
+  border-bottom: 2px dashed var(--line);
+  padding-bottom: 14px;
+  margin: 0 0 22px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  width: fit-content;
+  gap: 8px;
 }
 
 h2::before {
-  content: "⚡";
-  font-size: 16px;
-  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
-  animation: pulseIcon 2s ease-in-out infinite alternate;
+  content: "✦";
+  font-size: 14px;
+  animation: spinStar 3s linear infinite;
 }
 
-@keyframes pulseIcon {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.25) rotate(10deg); }
-}
+@keyframes spinStar { 100% { transform: rotate(360deg); } }
 
 /* ลิสต์การเรียนรู้ป๊อปอัป */
 .learning { list-style: none; padding: 0; margin: 0; }
@@ -360,18 +326,14 @@ h2::before {
 .works { display: grid; gap: 16px; grid-template-columns: 1fr; }
 .work {
   border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 20px;
+  border-radius: 16px;
+  padding: 18px;
   background: rgba(0,0,0,.2);
   transition: all 0.3s ease;
 }
-.work:hover { 
-  border-color: var(--accent); 
-  transform: translateY(-4px) scale(1.01);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-}
-.work h3 { margin: 0 0 6px; font-size: 17px; color: var(--text); }
-.work p { margin: 0; color: var(--muted); font-size: 14.5px; line-height: 1.6; }
+.work:hover { border-color: var(--accent); transform: scale(1.02); }
+.work h3 { margin: 0 0 6px; font-size: 17px; }
+.work p { margin: 0; color: var(--muted); font-size: 14.5px; }
 .work a { color: var(--accent); text-decoration: none; font-size: 14px; font-weight: 600; display: inline-block; margin-top: 10px; }
 .work a:hover { text-decoration: underline; }
 .empty {
@@ -446,7 +408,6 @@ footer a:hover { text-decoration: underline; }
     <div class="works" id="works"></div>
   </section>
 
-  <!-- ค่าทุกตัวในแผงนี้ browser วัดจากการโหลดหน้านี้จริง ไม่ได้เขียนค้างไว้ -->
   <section>
     <h2>ข้อมูลการเชื่อมต่อของหน้านี้</h2>
     <div class="panel">
@@ -473,7 +434,9 @@ $('name').textContent    = ME.name;
 $('tagline').textContent = ME.tagline;
 $('about').textContent   = ME.about;
 
-/* รูปโปรไฟล์ดึงจาก GitHub อัตโนมัติ */
+/* รูปโปรไฟล์ดึงจาก GitHub อัตโนมัติ ไม่ต้องอัปโหลดรูปเอง
+   ถ้าโหลดไม่สำเร็จ (พิมพ์ username ผิด หรือเน็ตมีปัญหา) จะแสดงตัวอักษรแรกของชื่อแทน
+   หน้าเว็บจะได้ไม่มีรูปแตกค้างอยู่ */
 const avatar = $('avatar');
 avatar.alt = 'รูปโปรไฟล์ของ ' + ME.name;
 avatar.addEventListener('error', () => {
@@ -501,7 +464,7 @@ for (const link of ME.links || []) {
   $('links').appendChild(li);
 }
 
-/* แสดงผลงาน */
+/* ผลงานยังว่างได้ ปี 1 เทอมแรกเป็นเรื่องปกติ */
 if (!ME.works || ME.works.length === 0) {
   const box = document.createElement('div');
   box.className = 'empty';
@@ -531,6 +494,7 @@ $('repolink').href = 'https://github.com/' + ME.github + '/' + ME.github + '.git
 
 /* ---------- 2) แผงข้อมูลการเชื่อมต่อ อ่านค่าจริงจาก Performance API ---------- */
 function ms(v) {
+  /* 0 ms ไม่ได้แปลว่าไม่มีค่า แต่แปลว่า browser ข้ามขั้นนั้นเพราะมีข้อมูลใน cache อยู่แล้ว */
   if (typeof v !== 'number' || v < 0 || Number.isNaN(v)) return '—';
   return Math.round(v) + ' ms';
 }
