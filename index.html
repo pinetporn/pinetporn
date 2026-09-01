@@ -48,15 +48,23 @@ learning: [
     { label: "GitHub", url: "https://github.com/pinetporn" },
   ],
 
+  // ธีมสี เลือกหนึ่งอย่าง: "ocean" | "sunset" | "forest" | "grape" | "mono" | "mono-light"
+  theme: "ocean",
+
+};
+</script>
+
 <style>
 /* ---------- สีพื้นฐาน ทุกธีมใช้ร่วมกัน ---------- */
 :root {
   --bg:#0b1020; --line:#24304f; --text:#e8edf7; --muted:#93a1c0;
-  --surface:rgba(255,255,255,.05);       /* พื้นของการ์ดผลงานและแผงข้อมูล */
+  --surface:rgba(255,255,255,.05);      /* พื้นของการ์ดผลงานและแผงข้อมูล */
   --mono: ui-monospace,"SF Mono",Menlo,Consolas,monospace;
 }
 
-/* ---------- ธีมสี ---------- */
+/* ---------- ธีมสี เลือกได้ที่ช่อง theme ด้านบน ไม่ต้องแก้ตรงนี้ ----------
+   ห้าธีมแรกเปลี่ยนแค่สีเน้นกับแสงพื้นหลัง พื้นหลังยังเข้มเหมือนกันหมด
+   จึงไม่มีทางเลือกจนอ่านไม่ออก                                          */
 :root,
 [data-theme="ocean"]  { --accent:#38bdf8; --accent-soft:#0ea5e9; --glow1:#1d2a52; --glow2:#10305c; }
 [data-theme="sunset"] { --accent:#fb923c; --accent-soft:#f97316; --glow1:#4a2418; --glow2:#5c2b10; }
@@ -64,144 +72,12 @@ learning: [
 [data-theme="grape"]  { --accent:#c084fc; --accent-soft:#a855f7; --glow1:#2e1d52; --glow2:#3d1a5c; }
 [data-theme="mono"]   { --accent:#e2e8f0; --accent-soft:#cbd5e1; --glow1:#1e293b; --glow2:#0f172a; }
 
+/* ธีมเดียวที่พลิกเป็นพื้นสว่าง จึงต้องเขียนยาวกว่าเพื่อน
+   เพราะต้องกลับค่าพื้นหลัง ตัวอักษร เส้น และพื้นการ์ดใหม่ทั้งชุด */
 [data-theme="mono-light"] {
   --accent:#334155; --accent-soft:#475569; --glow1:#dbe3ee; --glow2:#e6ebf3;
   --bg:#f7f9fc; --line:#ccd6e4; --text:#0f172a; --muted:#52627d;
   --surface:rgba(15,23,42,.04);
-}
-
-*{ box-sizing:border-box }
-
-body{
-  margin:0; min-height:100vh; color:var(--text);
-  font-family:"Segoe UI","Noto Sans Thai",system-ui,sans-serif;
-  line-height:1.75;
-  background:
-    radial-gradient(1000px 460px at 12% -10%, var(--glow1) 0, transparent 60%),
-    radial-gradient(820px 400px at 92% 0,   var(--glow2) 0, transparent 55%),
-    var(--bg);
-}
-
-/* ---------- รูปแบบการจัดวางใหม่: Bento Grid Layout ---------- */
-.wrap {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 40px 20px 60px;
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 20px;
-}
-
-/* 1. Header Hero Card (กินพื้นที่แถวบนเต็ม 12 คอลัมน์) */
-.hero {
-  grid-column: span 12;
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  padding: 32px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 24px;
-  backdrop-filter: blur(10px);
-}
-
-.avatar, .avatar-fallback {
-  width: 100px; height: 100px;
-  border-radius: 20px;
-  border: 2px solid var(--accent);
-  box-shadow: 0 0 20px var(--glow1);
-}
-
-.hero-text { flex: 1; }
-.role { font-size: 12px; margin-bottom: 4px; }
-h1 { font-size: 32px; margin: 0 0 6px; }
-.tagline { font-size: 16px; margin: 0; }
-
-/* 2. About & Links Card (ฝั่งซ้าย 5 คอลัมน์) */
-.about {
-  grid-column: span 5;
-  margin: 0;
-  padding: 24px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  font-size: 14.5px;
-  color: var(--muted);
-}
-
-.links {
-  grid-column: span 7;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 24px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 20px;
-}
-
-.links a {
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 10px 20px;
-  background: rgba(255,255,255,.02);
-  transition: all 0.2s ease;
-}
-
-.links a:hover {
-  border-color: var(--accent);
-  transform: translateY(-2px);
-}
-
-/* 3. Section Cards (แบ่งคอลัมน์ Bento) */
-section {
-  grid-column: span 6;
-  margin: 0;
-  padding: 24px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 20px;
-}
-
-/* ให้ส่วนข้อมูลการเชื่อมต่อกิน 12 คอลัมน์เต็มข้างล่าง */
-section:last-of-type {
-  grid-column: span 12;
-}
-
-h2 {
-  font-size: 12px;
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 10px;
-  margin: 0 0 16px;
-  color: var(--accent);
-}
-
-.learning li {
-  border-left: 3px solid var(--accent);
-  background: rgba(255,255,255,.02);
-  border-radius: 0 8px 8px 0;
-  padding: 8px 14px;
-  margin-bottom: 10px;
-}
-
-.panel { border: none; padding: 0; background: transparent; }
-
-footer {
-  grid-column: span 12;
-  text-align: center;
-  margin-top: 20px;
-  padding-top: 20px;
-}
-
-/* Responsive สำหรับหน้าจอมือถือ */
-@media (max-width: 768px) {
-  .wrap { grid-template-columns: 1fr; }
-  .hero, .about, .links, section, section:last-of-type {
-    grid-column: span 1;
-  }
-  .hero { flex-direction: column; text-align: center; }
-  .links { flex-wrap: wrap; justify-content: center; }
 }
 
 *{ box-sizing:border-box }
@@ -389,73 +265,4 @@ for (const link of ME.links || []) {
 
 /* ผลงานยังว่างได้ ปี 1 เทอมแรกเป็นเรื่องปกติ */
 if (!ME.works || ME.works.length === 0) {
-  const box = document.createElement('div');
-  box.className = 'empty';
-  box.textContent = 'ยังไม่มีผลงานในหน้านี้ กำลังเรียนรู้อยู่ แล้วจะกลับมาเพิ่มเรื่อย ๆ';
-  $('works').appendChild(box);
-} else {
-  for (const w of ME.works) {
-    const card = document.createElement('div');
-    card.className = 'work';
-    const h3 = document.createElement('h3');
-    h3.textContent = w.title;
-    const p = document.createElement('p');
-    p.textContent = w.desc;
-    card.append(h3, p);
-    if (w.url) {
-      const a = document.createElement('a');
-      a.href = w.url;
-      a.textContent = 'ดูผลงาน ↗';
-      a.rel = 'noopener noreferrer';
-      card.appendChild(a);
-    }
-    $('works').appendChild(card);
-  }
-}
-
-$('repolink').href = 'https://github.com/' + ME.github + '/' + ME.github + '.github.io';
-
-/* ---------- 2) แผงข้อมูลการเชื่อมต่อ อ่านค่าจริงจาก Performance API ---------- */
-function ms(v) {
-  /* 0 ms ไม่ได้แปลว่าไม่มีค่า แต่แปลว่า browser ข้ามขั้นนั้นเพราะมีข้อมูลใน cache อยู่แล้ว */
-  if (typeof v !== 'number' || v < 0 || Number.isNaN(v)) return '—';
-  return Math.round(v) + ' ms';
-}
-
-window.addEventListener('load', () => setTimeout(() => {
-  const nav = performance.getEntriesByType('navigation')[0];
-  const rows = [
-    ['Domain name', location.hostname || '(เปิดจากไฟล์ในเครื่อง)',
-     'ชื่อโดเมนต้องถูกแปลงเป็น IP address ผ่าน DNS ก่อน จึงจะติดต่อ server ได้'],
-    ['Protocol', location.protocol,
-     'https คือ HTTP ที่เพิ่มการเข้ารหัสและการยืนยันตัวตน server ด้วย certificate'],
-  ];
-  if (nav) rows.push(
-    ['HTTP version', nav.nextHopProtocol || '—',
-     'h2 คือ HTTP/2 และ h3 คือ HTTP/3 ซึ่งส่งหลายไฟล์พร้อมกันได้ในการเชื่อมต่อเดียว'],
-    ['DNS lookup', ms(nav.domainLookupEnd - nav.domainLookupStart),
-     'เวลาที่ใช้แปลงชื่อโดเมนเป็น IP address ถ้าได้ 0 ms แปลว่ามีคำตอบอยู่ใน cache แล้ว'],
-    ['Connection + TLS', ms(nav.connectEnd - nav.connectStart),
-     'เวลาสร้างการเชื่อมต่อ รวมขั้นตอน TLS handshake ก่อนเริ่มรับส่งข้อมูลจริง'],
-    ['TTFB', ms(nav.responseStart - nav.requestStart),
-     'Time To First Byte เวลาตั้งแต่ส่ง request จนได้ข้อมูลไบต์แรกกลับมา ยิ่ง server ไกลยิ่งสูง'],
-  );
-
-  for (const [label, value, note] of rows) {
-    const row = document.createElement('div');
-    row.className = 'row';
-    const dt = document.createElement('dt');
-    dt.textContent = label;
-    const dd = document.createElement('dd');
-    dd.textContent = value;
-    const small = document.createElement('span');
-    small.className = 'note';
-    small.textContent = note;
-    dd.appendChild(small);
-    row.append(dt, dd);
-    $('netpanel').appendChild(row);
-  }
-}, 0));
-</script>
-</body>
-</html>
+  const box = document.
