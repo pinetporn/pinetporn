@@ -265,4 +265,73 @@ for (const link of ME.links || []) {
 
 /* ผลงานยังว่างได้ ปี 1 เทอมแรกเป็นเรื่องปกติ */
 if (!ME.works || ME.works.length === 0) {
-  const box = document.
+  const box = document.createElement('div');
+  box.className = 'empty';
+  box.textContent = 'ยังไม่มีผลงานในหน้านี้ กำลังเรียนรู้อยู่ แล้วจะกลับมาเพิ่มเรื่อย ๆ';
+  $('works').appendChild(box);
+} else {
+  for (const w of ME.works) {
+    const card = document.createElement('div');
+    card.className = 'work';
+    const h3 = document.createElement('h3');
+    h3.textContent = w.title;
+    const p = document.createElement('p');
+    p.textContent = w.desc;
+    card.append(h3, p);
+    if (w.url) {
+      const a = document.createElement('a');
+      a.href = w.url;
+      a.textContent = 'ดูผลงาน ↗';
+      a.rel = 'noopener noreferrer';
+      card.appendChild(a);
+    }
+    $('works').appendChild(card);
+  }
+}
+
+$('repolink').href = 'https://github.com/' + ME.github + '/' + ME.github + '.github.io';
+
+/* ---------- 2) แผงข้อมูลการเชื่อมต่อ อ่านค่าจริงจาก Performance API ---------- */
+function ms(v) {
+  /* 0 ms ไม่ได้แปลว่าไม่มีค่า แต่แปลว่า browser ข้ามขั้นนั้นเพราะมีข้อมูลใน cache อยู่แล้ว */
+  if (typeof v !== 'number' || v < 0 || Number.isNaN(v)) return '—';
+  return Math.round(v) + ' ms';
+}
+
+window.addEventListener('load', () => setTimeout(() => {
+  const nav = performance.getEntriesByType('navigation')[0];
+  const rows = [
+    ['Domain name', location.hostname || '(เปิดจากไฟล์ในเครื่อง)',
+     'ชื่อโดเมนต้องถูกแปลงเป็น IP address ผ่าน DNS ก่อน จึงจะติดต่อ server ได้'],
+    ['Protocol', location.protocol,
+     'https คือ HTTP ที่เพิ่มการเข้ารหัสและการยืนยันตัวตน server ด้วย certificate'],
+  ];
+  if (nav) rows.push(
+    ['HTTP version', nav.nextHopProtocol || '—',
+     'h2 คือ HTTP/2 และ h3 คือ HTTP/3 ซึ่งส่งหลายไฟล์พร้อมกันได้ในการเชื่อมต่อเดียว'],
+    ['DNS lookup', ms(nav.domainLookupEnd - nav.domainLookupStart),
+     'เวลาที่ใช้แปลงชื่อโดเมนเป็น IP address ถ้าได้ 0 ms แปลว่ามีคำตอบอยู่ใน cache แล้ว'],
+    ['Connection + TLS', ms(nav.connectEnd - nav.connectStart),
+     'เวลาสร้างการเชื่อมต่อ รวมขั้นตอน TLS handshake ก่อนเริ่มรับส่งข้อมูลจริง'],
+    ['TTFB', ms(nav.responseStart - nav.requestStart),
+     'Time To First Byte เวลาตั้งแต่ส่ง request จนได้ข้อมูลไบต์แรกกลับมา ยิ่ง server ไกลยิ่งสูง'],
+  );
+
+  for (const [label, value, note] of rows) {
+    const row = document.createElement('div');
+    row.className = 'row';
+    const dt = document.createElement('dt');
+    dt.textContent = label;
+    const dd = document.createElement('dd');
+    dd.textContent = value;
+    const small = document.createElement('span');
+    small.className = 'note';
+    small.textContent = note;
+    dd.appendChild(small);
+    row.append(dt, dd);
+    $('netpanel').appendChild(row);
+  }
+}, 0));
+</script>
+</body>
+</html>
