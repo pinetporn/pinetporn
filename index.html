@@ -23,7 +23,7 @@ const ME = {
   role: "นักศึกษาวิศวกรรมคอมพิวเตอร์ ปี 2 · มทร.อีสาน",
 
   // หนึ่งประโยคว่าคุณสนใจสร้างอะไร เขียนให้เจาะจง อย่าเขียนกว้าง ๆ
-  // ไม่ดี: "รักการเขียนโปรแกรม"   ดี: "อยากทำระบบรดน้ำต้นไม้ที่ดูพยากรณ์อากาศก่อนรดน้ำ"
+  // ไม่ดี: "รักการเขียนโปรแกรม"    ดี: "อยากทำระบบรดน้ำต้นไม้ที่ดูพยากรณ์อากาศก่อนรดน้ำ"
   tagline: "สนใจระบบเว็บคอนโทรเลอร์อุปกรณ์แบบเรียลไทม์",
 
   // แนะนำตัว 2-3 บรรทัด ว่ามาจากไหน สนใจอะไร กำลังจะไปทางไหน
@@ -85,99 +85,218 @@ learning: [
 body{
   margin:0; min-height:100vh; color:var(--text);
   font-family:"Segoe UI","Noto Sans Thai",system-ui,sans-serif;
-  line-height:1.75;                       /* ระยะห่างระหว่างบรรทัด อ่านง่ายขึ้นมาก */
+  line-height:1.75;
   background:
     radial-gradient(1000px 460px at 12% -10%, var(--glow1) 0, transparent 60%),
     radial-gradient(820px 400px at 92% 0,   var(--glow2) 0, transparent 55%),
     var(--bg);
 }
 
-/* ความกว้างจำกัดไว้ ไม่ให้บรรทัดยาวจนตาไล่ไม่ทัน */
-.wrap{ max-width:760px; margin:0 auto; padding:0 22px 80px }
-
-/* ---------- ส่วนหัว ---------- */
-.hero{ display:flex; gap:22px; align-items:center; padding:64px 0 8px; flex-wrap:wrap }
-.avatar{
-  width:96px; height:96px; border-radius:50%;
-  border:2px solid var(--accent); object-fit:cover; flex-shrink:0;
-  background:var(--surface);
-}
-/* ใช้แทนรูปโปรไฟล์ เมื่อโหลดรูปจาก GitHub ไม่สำเร็จ */
-.avatar-fallback{
-  width:96px; height:96px; border-radius:50%; flex-shrink:0;
-  border:2px solid var(--accent); background:var(--surface);
-  display:flex; align-items:center; justify-content:center;
-  font-size:38px; font-weight:600; color:var(--accent);
-}
-.hero-text{ flex:1; min-width:240px }
-.role{
-  font:600 12px/1 var(--mono); letter-spacing:.14em;
-  text-transform:uppercase; color:var(--accent); margin:0 0 8px;
-}
-h1{ font-size:clamp(30px,6vw,46px); line-height:1.15; margin:0 0 8px; letter-spacing:-.02em }
-.tagline{ font-size:clamp(17px,2.6vw,20px); color:var(--text); margin:0; opacity:.92 }
-
-.about{ color:var(--muted); margin:26px 0 0; max-width:62ch }
-
-/* ---------- ปุ่มลิงก์ ---------- */
-.links{ display:flex; flex-wrap:wrap; gap:10px; padding:0; margin:24px 0 0; list-style:none }
-.links a{
-  display:inline-block; border:1px solid var(--line); border-radius:999px;
-  padding:9px 20px; color:var(--text); text-decoration:none; font-size:15px;
-  transition:border-color .15s ease, color .15s ease;
-}
-.links a:hover, .links a:focus-visible{ border-color:var(--accent); color:var(--accent) }
-
-/* ---------- หัวข้อของแต่ละส่วน ---------- */
-section{ margin-top:52px }
-h2{
-  font:600 12px/1 var(--mono); letter-spacing:.16em; text-transform:uppercase;
-  color:var(--muted); border-bottom:1px solid var(--line);
-  padding-bottom:10px; margin:0 0 20px;
+/* ---------- รูปแบบใหม่: Modern Bento Grid Layout ---------- */
+.wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
 }
 
-/* ---------- รายการกำลังเรียนรู้ ---------- */
-.learning{ list-style:none; padding:0; margin:0 }
-.learning li{
-  border-left:2px solid var(--accent); padding:2px 0 2px 16px;
-  margin-bottom:14px; color:var(--muted);
+/* ส่วนหัว Hero แบบการ์ดใหญ่เต็มความกว้าง */
+.hero {
+  grid-column: span 12;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 32px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
 }
 
-/* ---------- ผลงาน ---------- */
-.works{ display:grid; gap:14px; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)) }
-.work{
-  border:1px solid var(--line); border-radius:12px; padding:16px 18px;
-  background:var(--surface);
-}
-.work h3{ margin:0 0 6px; font-size:17px }
-.work p{ margin:0; color:var(--muted); font-size:14.5px }
-.work a{ color:var(--accent); text-decoration:none; font-size:14px; display:inline-block; margin-top:10px }
-.work a:hover{ text-decoration:underline }
-.empty{
-  border:1px dashed var(--line); border-radius:12px; padding:26px 20px;
-  color:var(--muted); text-align:center; font-size:15px;
+.avatar, .avatar-fallback {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--surface);
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
 
-/* ---------- แผงข้อมูลการเชื่อมต่อ ---------- */
-.panel{ border:1px solid var(--line); border-radius:14px; background:var(--surface); padding:4px 20px 16px }
-.row{
-  display:grid; grid-template-columns:minmax(130px,1fr) minmax(0,1.5fr); gap:12px;
-  padding:11px 0; border-bottom:1px dashed var(--line); align-items:baseline;
+.avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--accent);
 }
-.row:last-of-type{ border-bottom:0 }
-.row dt{ color:var(--muted); font-size:14px; margin:0 }
-.row dd{ margin:0; font-family:var(--mono); font-size:14px; color:var(--accent); word-break:break-all }
-.row .note{ display:block; color:var(--muted); font-family:inherit; font-size:12.5px }
-.hint{ color:var(--muted); font-size:14px; margin:14px 0 0 }
 
-footer{ margin-top:56px; padding-top:22px; border-top:1px solid var(--line); color:var(--muted); font-size:14px }
-footer a{ color:var(--accent) }
+.hero-text { flex: 1; min-width: 240px; }
+.role {
+  font: 600 12px/1 var(--mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 8px;
+}
 
-/* ---------- จอมือถือ ---------- */
-@media (max-width:520px){
-  .hero{ padding-top:44px; gap:16px }
-  .avatar, .avatar-fallback{ width:72px; height:72px; font-size:28px }
-  .row{ grid-template-columns:1fr; gap:2px }
+h1 {
+  font-size: clamp(26px, 5vw, 36px);
+  line-height: 1.2;
+  margin: 0 0 8px;
+  letter-spacing: -.02em;
+}
+
+.tagline {
+  font-size: clamp(15px, 2.2vw, 18px);
+  color: var(--text);
+  margin: 0;
+  opacity: .92;
+}
+
+/* ข้อความแนะนำตัวและลิงก์จัดเรียงแบบฝั่งการ์ดคู่ */
+.about {
+  grid-column: span 7;
+  color: var(--muted);
+  margin: 0;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.links {
+  grid-column: span 5;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: 10px;
+  padding: 24px;
+  margin: 0;
+  list-style: none;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+}
+
+.links a {
+  display: inline-block;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 18px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 14px;
+  background: rgba(255,255,255,.02);
+  transition: all .2s ease;
+}
+
+.links a:hover, .links a:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* จัดวางแต่ละเซกชันในการ์ด Bento */
+section {
+  grid-column: span 6;
+  margin-top: 0;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* แผงข้อมูลการเชื่อมต่อให้ขยายเต็ม 12 คอลัมน์ด้านล่างสุด */
+section:last-of-type {
+  grid-column: span 12;
+}
+
+h2 {
+  font: 600 12px/1 var(--mono);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 12px;
+  margin: 0 0 20px;
+}
+
+/* รายการกำลังเรียนรู้ */
+.learning { list-style: none; padding: 0; margin: 0; }
+.learning li {
+  border-left: 2px solid var(--accent);
+  padding: 4px 0 4px 14px;
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 14.5px;
+}
+
+/* รายการผลงาน */
+.works { display: grid; gap: 14px; grid-template-columns: 1fr; }
+.work {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  background: rgba(0,0,0,.15);
+}
+.work h3 { margin: 0 0 6px; font-size: 16px; }
+.work p { margin: 0; color: var(--muted); font-size: 14px; }
+.work a { color: var(--accent); text-decoration: none; font-size: 13.5px; display: inline-block; margin-top: 8px; }
+.work a:hover { text-decoration: underline; }
+.empty {
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  padding: 30px 20px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 14px;
+}
+
+/* แผงข้อมูลการเชื่อมต่อ */
+.panel { border: none; border-radius: 0; background: transparent; padding: 0; }
+.row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px dashed var(--line);
+  align-items: baseline;
+}
+.row:last-of-type { border-bottom: 0; }
+.row dt { color: var(--muted); font-size: 14px; margin: 0; }
+.row dd { margin: 0; font-family: var(--mono); font-size: 14px; color: var(--accent); word-break: break-all; }
+.row .note { display: block; color: var(--muted); font-family: inherit; font-size: 12.5px; margin-top: 2px; }
+.hint { color: var(--muted); font-size: 13.5px; margin: 16px 0 0; }
+
+footer {
+  grid-column: span 12;
+  margin-top: 10px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+}
+footer a { color: var(--accent); }
+
+/* การรองรับหน้าจอมือถือ */
+@media (max-width: 768px) {
+  .wrap { grid-template-columns: 1fr; gap: 16px; }
+  .hero, .about, .links, section, section:last-of-type, footer {
+    grid-column: span 1;
+  }
+  .hero { flex-direction: column; text-align: center; padding: 24px; }
+  .row { grid-template-columns: 1fr; gap: 4px; }
 }
 </style>
 </head>
